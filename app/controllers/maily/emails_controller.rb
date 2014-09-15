@@ -62,8 +62,18 @@ module Maily
 
     def perform_with_locale
       I18n.with_locale(params[:locale]) do
+        set_up_locale
         yield
       end
+    end
+
+    def set_up_locale
+      domain = request.domain(0)
+      locale_by_domain = case domain
+                           when 'br' then :pt
+                           else           :es
+                         end
+      $locale = params[:locale] || locale_by_domain
     end
   end
 end
