@@ -3,7 +3,6 @@ module Maily
     before_filter :allowed_action?, only: [:edit, :update, :deliver]
     before_filter :load_mailers, only: [:index, :show, :edit]
     before_filter :load_mailer_and_email, except: [:index]
-    before_filter :setup_locale, only: [:show, :raw, :deliver]
     around_filter :perform_with_locale, only: [:show, :raw, :deliver]
 
     def index
@@ -58,6 +57,7 @@ module Maily
     def load_mailer_and_email
       mailer = Maily::Mailer.find(params[:mailer])
       @maily_email = mailer.find_email(params[:email])
+      setup_locale
       @email = @maily_email.call
     end
 
@@ -68,10 +68,10 @@ module Maily
     end
 
     def setup_locale
-      $locale = params[:locale] || case request.domain(0)
-                                     when 'br' then :pt
-                                     else           :es
-                                   end
+      $maily_locale = params[:locale] || case request.domain(0)
+                                           when 'br' then :pt
+                                           else           :es
+                                         end
     end
   end
 end
