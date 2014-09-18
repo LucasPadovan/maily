@@ -52,6 +52,7 @@ module Maily
 
     def load_mailers
       @mailers = Maily::Mailer.all
+      @mailers = @mailers.sort! { |a, b| a.name <=> b.name }
     end
 
     def load_mailer_and_email
