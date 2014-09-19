@@ -1,7 +1,5 @@
-/*
- *= require maily/normalize
- *= require maily/icons
-*/
+@import 'maily/normalize.css';
+@import 'maily/icons.css';
 
 /* Default */
 @font-face {
@@ -21,10 +19,6 @@
 ::-moz-placeholder { font-size: 0.6em; }
 :-ms-input-placeholder { font-size: 0.6em; }
 
-
-$textColor: #444;
-$linkColor: #59abc6;
-
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -34,12 +28,12 @@ $linkColor: #59abc6;
 .clearfix:after { clear: both; }
 
 body {
-  color: $textColor;
+  color: #444;
   font-size: 1em;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
 
   a {
-    color: $linkColor;
+    color: #59abc6;
     text-decoration: none;
   }
 }
@@ -62,7 +56,7 @@ header.header {
   box-shadow: 0 .0625em .3125em rgba(0,0,0, .15);
 
   .logo_link {
-    color: $textColor;
+    color: #444;
     text-decoration: none;
     font: 400 2em/1 'Josefin Sans';
 
@@ -80,7 +74,7 @@ footer.footer {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
 
   a {
-    color: $linkColor;
+    color: #59abc6;
     text-decoration: none;
     font-size: .9em;
   }
@@ -209,7 +203,7 @@ footer.footer {
     padding: 0;
     border: none;
     background: none;
-    color: $linkColor;
+    color: #59abc6;
   }
 
   .maily_format_mail {
@@ -226,7 +220,7 @@ footer.footer {
       float: left;
 
       a.format_selected {
-        color: darken($linkColor, 20%);
+        color: darken(#59abc6, 20%);
         font-weight: bold;
       }
 
@@ -277,13 +271,13 @@ aside.sidebar {
         list-style: none;
 
         a {
-          color: $linkColor;
+          color: #59abc6;
           text-decoration: none;
           font-size: .9em;
 
           &.maily_selected_mail {
 
-            color: darken($linkColor, 20%);
+            color: darken(#59abc6, 20%);
             font-weight: bold;
             &:before {
               content: "\e63e";
@@ -302,7 +296,7 @@ aside.sidebar {
           }
 
           &:hover {
-            color: darken($linkColor, 20%);
+            color: darken(#59abc6, 20%);
           }
         }
       }
