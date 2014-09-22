@@ -1,13 +1,14 @@
 module Maily
   class Mailer
-    cattr_accessor :collection
+    cattr_accessor :collection, :hooked_emails
     attr_accessor :name, :emails
 
     def initialize(name, methods)
-      self.collection ||= []
-      self.name       = name
-      self.emails     = self.class.build_emails(methods, name)
-      self.collection << self
+      self.collection    ||= []
+      self.hooked_emails ||= []
+      self.name          = name
+      self.emails        = self.class.build_emails(methods, name)
+      self.collection    << self
     end
 
     def self.all
@@ -27,7 +28,7 @@ module Maily
 
     def register_hook(email_name, *args)
       email = find_email(email_name)
-      email.register_hook(args)
+      self.hooked_emails << email_name.to_s if email.register_hook(args)
     end
 
     def find_email(email_name)

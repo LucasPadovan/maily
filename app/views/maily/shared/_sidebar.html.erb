@@ -1,12 +1,16 @@
 <aside class="sidebar">
   <% @mailers.each do |mailer| %>
-    <section class="nav_list">
-      <h3 class="title nav_title"><%= mailer.name.humanize %></h3>
-      <ul>
-        <% mailer.emails.sort! { |a,b| a.name <=> b.name }.each do |email| %>
-          <li><%= link_to email.name.humanize, maily_email_path(mailer: mailer.name, email: email.name), class: sidebar_class(mailer, email) %></li>
-        <% end %>
-      </ul>
-    </section>
+    <% if mailer.emails.map { |email| email.name}.any? { |email_name| mailer.hooked_emails.include?(email_name) } %>
+      <section class="nav_list">
+        <h3 class="title nav_title"><%= mailer.name.humanize %></h3>
+        <ul>
+          <% mailer.emails.sort! { |a,b| a.name <=> b.name }.each do |email| %>
+            <% if mailer.hooked_emails.include?(email.name) %>
+              <li><%= link_to email.name.humanize, maily_email_path(mailer: mailer.name, email: email.name), class: sidebar_class(mailer, email) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
   <% end %>
 </aside>
